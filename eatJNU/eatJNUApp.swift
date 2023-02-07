@@ -11,7 +11,10 @@ import SwiftUI
 struct eatJNUApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            NavigationView {
+                MainView()
+            }
+            
         }
     }
 }

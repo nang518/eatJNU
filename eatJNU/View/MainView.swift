@@ -10,7 +10,9 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         
-        ZStack {            
+        ZStack {
+            Color.white.ignoresSafeArea()
+            
             VStack(spacing: 0) {
                 Image("rabbit")
                     .resizable()
@@ -51,20 +53,34 @@ struct MainView: View {
                 }
                 .padding(.horizontal,32)
             }
+            
             .padding(.horizontal, 16)
+            .navigationBarItems(trailing: searchButton())
+            .navigationBarItems(trailing: plusButton())
         }
-
     }
     
     @ViewBuilder
     func searchButton() -> some View {
         NavigationLink(destination: SearchView()) {
             Image(systemName: "magnifyingglass")
-                .font(.system(size: 44, weight: .light))
-                .foregroundColor(Color("JNUColor"))
+                .font(.system(size: 20, weight: .light))
+                .foregroundColor(Color.black)
             
         }
-        .navigationBarBackButtonHidden(true)
+        
+    }
+    
+    @ViewBuilder
+    func plusButton() -> some View {
+        Button {
+            
+        } label: {
+            Image(systemName: "plus")
+                .font(.system(size:20, weight: .light))
+                .foregroundColor(Color.black)
+        }
+        
     }
     
     
