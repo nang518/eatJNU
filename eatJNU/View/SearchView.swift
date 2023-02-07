@@ -40,7 +40,7 @@ struct SearchView: View {
     @State private var searchText = ""
     
     let array = [
-        "조윤환", "조변태"
+        ""
     ]
     var body: some View {
         ZStack {
