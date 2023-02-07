@@ -10,85 +10,78 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         
-        
-        VStack(spacing: 0) {
-            Image("rabbit")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding(.top,64)
-            
-            Text("전대 밥토끼")
-                .font(.custom("BMDoHyeon-OTF", size:48))
-                .padding(.bottom, 4)
-            
-            VStack {
-                Spacer()
-                    .frame(height: 8)
-                Button {
-                    
-                } label: {
-                    Text("후문")
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: 48)
-                .background(Color("JNUColor"))
-                .font(.system(size: 24, weight: .bold))
-                .kerning(10)
+        ZStack {            
+            VStack(spacing: 0) {
+                Image("rabbit")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .padding(.top,64)
                 
-                //.padding(.vertical, 4)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
-                )
+                Text("전대 밥토끼")
+                    .font(.custom("BMDoHyeon-OTF", size:48))
+                    .padding(.bottom, 4)
                 
-                Spacer()
-                    .frame(height: 16)
-                Button {
+                VStack {
+                    Spacer()
+                        .frame(height: 8)
+                    Button {
+                        
+                    } label: {
+                        Text("후문")
+                    }
+                    .buttonStyle(MainButton())
                     
-                } label: {
-                    Text("상대")
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: 48)
-                .background(Color("JNUColor"))
-                .font(.system(size: 24, weight: .bold))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
-                )
-                .kerning(10)
-                
-                Spacer()
-                    .frame(height: 16)
-                Button {
+                    Spacer()
+                        .frame(height: 16)
+                    Button {
+                        
+                    } label: {
+                        Text("상대")
+                    }
+                    .buttonStyle(MainButton())
                     
-                } label: {
-                    Text("정문")
+                    Spacer()
+                        .frame(height: 16)
+                    Button {
+                        
+                    } label: {
+                        Text("정문")
+                    }
+                    .buttonStyle(MainButton())
                 }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity, maxHeight: 48)
-                .background(Color("JNUColor"))
-                .font(.system(size: 24, weight: .bold))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
-                )
-                .kerning(10)
+                .padding(.horizontal,32)
             }
-            .padding(.horizontal,32)
+            .padding(.horizontal, 16)
         }
-        .padding(.horizontal, 16)
+
     }
+    
+    @ViewBuilder
+    func searchButton() -> some View {
+        NavigationLink(destination: SearchView()) {
+            Image(systemName: "magnifyingglass")
+                .font(.system(size: 44, weight: .light))
+                .foregroundColor(Color("JNUColor"))
+            
+        }
+        .navigationBarBackButtonHidden(true)
+    }
+    
+    
 }
 
 struct MainButton: ButtonStyle {
-    static let JNUColor = Color("JNUColor")
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundColor(Color.white)
-            
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: 48)
             .background(Color("JNUColor"))
-            .frame(maxWidth: .infinity)
+            .font(.system(size: 24, weight: .bold))
+            .kerning(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color.black, lineWidth: 4)
+            )
             
            
     }
