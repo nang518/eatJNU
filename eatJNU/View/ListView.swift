@@ -22,16 +22,17 @@ struct ListView: View {
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
                                     .frame(width: 15, height: 15)
-                                    .padding(6)
+                                    .padding(4)
                                     .background(selectedCategory.id == category.id ? Color.white : Color.clear)
                                     .clipShape(Capsule())
 
                                 Text(category.title)
                                     .fontWeight(.bold)
+                                    .font(.system(size: 14))
                                     .foregroundColor(selectedCategory.id == category.id ? .white : .black)
                             }
-                            .padding(.vertical, 12)
-                            .padding(.horizontal)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 8)
                             .background(selectedCategory.id == category.id ? Color("JNUColor") : Color.gray.opacity(0.08))
                             .clipShape(Capsule())
                             .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
@@ -48,7 +49,7 @@ struct ListView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack(spacing: 20) {
-                        
+                        PopularItemRowView()
                     }
                     .padding()
                 })

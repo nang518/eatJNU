@@ -14,6 +14,7 @@ struct Category: Identifiable {
 }
 
 var categories = [
+    Category(image: "logo0", title: "전체"),
     Category(image: "logo1", title: "맛집"),
     Category(image: "logo2", title: "술집"),
     Category(image: "logo3", title: "카페")

@@ -40,12 +40,13 @@ class Network: ObservableObject {
             print("데이터 다운로드 성공")
             
             let jsonString = String(data: data, encoding: .utf8)
-//            print(jsonString)
+//          print(jsonString)
                         
             guard let newPost = try? JSONDecoder().decode(ItemResponse.self, from: data) else { return }
             DispatchQueue.main.async { [weak self] in
 //                self?.posts.append(newPost[Item])
                 self?.posts = newPost
+//                print(self?.posts)
             }
         }
         .resume()

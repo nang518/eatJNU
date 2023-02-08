@@ -19,14 +19,6 @@ struct Item: Identifiable, Codable {
     let name: String
     let image: String
     let reviewCount, likeCount: Int
-    let tags: Tags
-    
-    enum Name: String, Codable {
-        case 다원 = "다원"
-    }
-
-    enum Tags: String, Codable {
-        case 가성비맛집볶음밥삼겹살 = "#가성비 #맛집 #볶음밥 #삼겹살"
-    }
+    let tags: String
+    let filter: String
 }
-
