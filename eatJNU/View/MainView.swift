@@ -26,30 +26,16 @@ struct MainView: View {
                 VStack {
                     Spacer()
                         .frame(height: 8)
-                    Button {
-                        
-                    } label: {
-                        Text("후문")
-                    }
-                    .buttonStyle(MainButton())
+                    
+                    fstButton()
                     
                     Spacer()
                         .frame(height: 16)
-                    Button {
-                        
-                    } label: {
-                        Text("상대")
-                    }
-                    .buttonStyle(MainButton())
+                    sndButton()
                     
                     Spacer()
                         .frame(height: 16)
-                    Button {
-                        
-                    } label: {
-                        Text("정문")
-                    }
-                    .buttonStyle(MainButton())
+                    trdButton()
                 }
                 .padding(.horizontal,32)
             }
@@ -57,6 +43,57 @@ struct MainView: View {
             .padding(.horizontal, 16)
             .navigationBarItems(trailing: searchButton())
             .navigationBarItems(trailing: plusButton())
+        }
+    }
+    
+    @ViewBuilder
+    func fstButton() -> some View {
+        NavigationLink(destination: ListView()) {
+           Text("후문")
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: 48)
+                .background(Color("JNUColor"))
+                .font(.system(size: 24, weight: .bold))
+                .kerning(10)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 4)
+                )
+        }
+    }
+    
+    @ViewBuilder
+    func sndButton() -> some View {
+        NavigationLink(destination: ListView()) {
+           Text("상대")
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: 48)
+                .background(Color("JNUColor"))
+                .font(.system(size: 24, weight: .bold))
+                .kerning(10)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 4)
+                )
+        }
+    }
+    
+    @ViewBuilder
+    func trdButton() -> some View {
+        NavigationLink(destination: ListView()) {
+           Text("정문")
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: 48)
+                .background(Color("JNUColor"))
+                .font(.system(size: 24, weight: .bold))
+                .kerning(10)
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.black, lineWidth: 4)
+                )
         }
     }
     
@@ -84,23 +121,6 @@ struct MainView: View {
     }
     
     
-}
-
-struct MainButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity, maxHeight: 48)
-            .background(Color("JNUColor"))
-            .font(.system(size: 24, weight: .bold))
-            .kerning(10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color.black, lineWidth: 4)
-            )
-            
-           
-    }
 }
 
 struct MainView_Previews: PreviewProvider {
