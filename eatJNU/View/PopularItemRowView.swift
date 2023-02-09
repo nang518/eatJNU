@@ -60,10 +60,13 @@ struct PopularItemRowView: View {
 
 
                                 }
-
-                                //                            Text(post.tags)
-                                //                                .foregroundColor(Color(.systemGray2))
-                                //                                .font(.system(size: 12))
+                                
+                                if (post.tags != nil) {
+                                    Text(post.tags!)
+                                        .foregroundColor(Color(.systemGray2))
+                                        .font(.system(size: 12))
+                                }
+                                
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
@@ -191,10 +194,11 @@ struct PopularItemRowView: View {
 
 
                             }
-
-                            //                            Text(post.tags)
-                            //                                .foregroundColor(Color(.systemGray2))
-                            //                                .font(.system(size: 12))
+//                            
+//                        
+//                            Text(post.tags.isEmpty ? "" : post.tags)
+//                                .foregroundColor(Color(.systemGray2))
+//                                .font(.system(size: 12))
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
