@@ -47,14 +47,11 @@ struct ListView: View {
                     
                 })
                 
-                ScrollView(.horizontal, showsIndicators: false, content: {
+                ScrollView {
                     HStack(spacing: 20) {
                         PopularItemRowView()
                     }
-                    .padding()
-                })
-                
-                
+                }
             }
                 
         }

@@ -11,7 +11,7 @@ import URLImage
 struct PopularItemRowView: View {
     @StateObject var vm = Network()
     var body: some View {
-        ScrollView {
+        VStack {
             ForEach(vm.posts.items) { post in
                     let urlStr = post.image
                     let newStr = urlStr.replacingOccurrences(of: " ", with: "")
@@ -57,7 +57,6 @@ struct PopularItemRowView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     }
-                    
                 }
         }
     }
