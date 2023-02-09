@@ -81,7 +81,7 @@ struct ListView: View {
                     
                 })
                 
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     HStack(spacing: 20) {
                         PopularItemRowView(
                             selectedFilterNum: selectedFilterNum,
@@ -90,6 +90,7 @@ struct ListView: View {
                     }
                 }
             }
+            .padding(.horizontal, 16)
                 
         }
         .navigationBarItems(leading: btnBack)
