@@ -10,35 +10,64 @@ import SwiftUI
 struct ListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var selectedCategory: Category = categories.first!
+    @State var selectedFilterNum: Int = 1
+    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             VStack {
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack(spacing: 15) {
-                        ForEach(categories) { category in
-                            HStack(spacing: 10) {
-                                Image(category.image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 15, height: 15)
-                                    .padding(4)
-                                    .background(selectedCategory.id == category.id ? Color.white : Color.clear)
-                                    .clipShape(Capsule())
+                        ForEach(categories.indices) { index in
+                            
+                            
+                            if (selectedFilterNum == index) {
+                                // 선택된 필터를 처리
+                                HStack(spacing: 10) {
+                                    Image(categories[index].image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 15, height: 15)
+                                        .padding(4)
+                                        .background(Color.white)
+                                        .clipShape(Capsule())
 
-                                Text(category.title)
-                                    .fontWeight(.bold)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(selectedCategory.id == category.id ? .white : .black)
-                            }
-                            .padding(.vertical, 6)
-                            .padding(.horizontal, 8)
-                            .background(selectedCategory.id == category.id ? Color("JNUColor") : Color.gray.opacity(0.08))
-                            .clipShape(Capsule())
-                            .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
-                            .onTapGesture {
-                                withAnimation(.spring()) {
-                                    selectedCategory = category
+                                    Text(categories[index].title)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 8)
+                                .background(Color("JNUColor"))
+                                .clipShape(Capsule())
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                            } else {
+                                // 일반 필터를 처리
+                                HStack(spacing: 10) {
+                                    Image(categories[index].image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 15, height: 15)
+                                        .padding(4)
+                                        .background(Color.clear)
+                                        .clipShape(Capsule())
+
+                                    Text(categories[index].title)
+                                        .fontWeight(.bold)
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.black)
+                                }
+                                .padding(.vertical, 6)
+                                .padding(.horizontal, 10
+                                )
+                                .background(Color.gray.opacity(0.08))
+                                .clipShape(Capsule())
+                                .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
+                                .onTapGesture {
+                                    withAnimation(.spring()) {
+                                        selectedFilterNum = index
+                                    }
                                 }
                             }
                         }
@@ -49,7 +78,7 @@ struct ListView: View {
                 
                 ScrollView {
                     HStack(spacing: 20) {
-                        PopularItemRowView()
+                        PopularItemRowView(selectedFilterNum: selectedFilterNum)
                     }
                 }
             }
