@@ -11,6 +11,11 @@ struct ListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var selectedCategory: Category = categories.first!
     @State var selectedFilterNum: Int = 1
+    var areaTypeNum: Int
+    
+    init(areaType: Int) {
+        self.areaTypeNum = areaType
+    }
     
     var body: some View {
         ZStack {
@@ -78,7 +83,10 @@ struct ListView: View {
                 
                 ScrollView {
                     HStack(spacing: 20) {
-                        PopularItemRowView(selectedFilterNum: selectedFilterNum)
+                        PopularItemRowView(
+                            selectedFilterNum: selectedFilterNum,
+                            areaType: areaTypeNum
+                        )
                     }
                 }
             }
@@ -132,6 +140,6 @@ extension UINavigationController: ObservableObject, UIGestureRecognizerDelegate 
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+       ContentView()
     }
 }

@@ -48,7 +48,7 @@ struct MainView: View {
     
     @ViewBuilder
     func fstButton() -> some View {
-        NavigationLink(destination: ListView()) {
+        NavigationLink(destination: ListView(areaType: 0)) {
            Text("후문")
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: 48)
@@ -65,7 +65,7 @@ struct MainView: View {
     
     @ViewBuilder
     func sndButton() -> some View {
-        NavigationLink(destination: ListView()) {
+        NavigationLink(destination: ListView(areaType: 1)) {
            Text("상대")
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: 48)
@@ -82,7 +82,7 @@ struct MainView: View {
     
     @ViewBuilder
     func trdButton() -> some View {
-        NavigationLink(destination: ListView()) {
+        NavigationLink(destination: ListView(areaType: 2)) {
            Text("정문")
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity, maxHeight: 48)

@@ -9,21 +9,23 @@ import SwiftUI
 import URLImage
 
 struct PopularItemRowView: View {
-    @StateObject var vm = Network()
+    @StateObject var viewModel = Network()
+    
     private var selectedFilterNum: Int
-    
-    init(selectedFilterNum: Int) {
+    private var areaTypeNum: Int
+   
+    init(selectedFilterNum: Int, areaType: Int) {
         self.selectedFilterNum = selectedFilterNum
+        self.areaTypeNum = areaType
     }
-    
     
     var body: some View {
         VStack {
-            ForEach(vm.posts.items) { post in
+            ForEach(viewModel.posts.items) { post in
                 let urlStr = post.image
                 let newStr = urlStr.replacingOccurrences(of: " ", with: "")
                 let url = URL(string: newStr)!
-                
+
                 if (selectedFilterNum == 1) {
                     if (post.filter == "맛집") {
                         HStack(spacing: 2) {
@@ -37,28 +39,28 @@ struct PopularItemRowView: View {
                                     )
                                     .cornerRadius(24)
                             }
-                            
+
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
-                                
-                                
+
+
                                 HStack {
                                     Image("like2")
                                         .frame(width: 16, height: 16)
-                                    
+
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
-                                    
-                                    
+
+
                                     Text("리뷰 \(post.reviewCount)")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
-                                    
-                                    
-                                    
+
+
+
                                 }
-                                
+
                                 //                            Text(post.tags)
                                 //                                .foregroundColor(Color(.systemGray2))
                                 //                                .font(.system(size: 12))
@@ -81,28 +83,28 @@ struct PopularItemRowView: View {
                                     )
                                     .cornerRadius(24)
                             }
-                            
+
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
-                                
-                                
+
+
                                 HStack {
                                     Image("like2")
                                         .frame(width: 16, height: 16)
-                                    
+
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
-                                    
-                                    
+
+
                                     Text("리뷰 \(post.reviewCount)")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
-                                    
-                                    
-                                    
+
+
+
                                 }
-                                
+
                                 //                            Text(post.tags)
                                 //                                .foregroundColor(Color(.systemGray2))
                                 //                                .font(.system(size: 12))
@@ -125,28 +127,28 @@ struct PopularItemRowView: View {
                                     )
                                     .cornerRadius(24)
                             }
-                            
+
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
-                                
-                                
+
+
                                 HStack {
                                     Image("like2")
                                         .frame(width: 16, height: 16)
-                                    
+
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
-                                    
-                                    
+
+
                                     Text("리뷰 \(post.reviewCount)")
                                         .font(.system(size: 14))
                                         .foregroundColor(.gray)
-                                    
-                                    
-                                    
+
+
+
                                 }
-                                
+
                                 //                            Text(post.tags)
                                 //                                .foregroundColor(Color(.systemGray2))
                                 //                                .font(.system(size: 12))
@@ -168,28 +170,28 @@ struct PopularItemRowView: View {
                                 )
                                 .cornerRadius(24)
                         }
-                        
+
                         VStack(alignment: .leading, spacing: 2) {
                             Text(post.name)
                                 .font(.system(size: 16, weight: .bold))
-                            
-                            
+
+
                             HStack {
                                 Image("like2")
                                     .frame(width: 16, height: 16)
-                                
+
                                 Text("\(post.likeCount)")
                                     .font(.custom("BMDOHYEON-OTF", size: 14))
-                                
-                                
+
+
                                 Text("리뷰 \(post.reviewCount)")
                                     .font(.system(size: 14))
                                     .foregroundColor(.gray)
-                                
-                                
-                                
+
+
+
                             }
-                            
+
                             //                            Text(post.tags)
                             //                                .foregroundColor(Color(.systemGray2))
                             //                                .font(.system(size: 12))
@@ -202,12 +204,14 @@ struct PopularItemRowView: View {
                     Text("ERROR")
                 }
             }
+        }.onAppear {
+            viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceList/\(areaTypeNum)")
         }
     }
 }
 
 struct PopularItemRowView_Previews: PreviewProvider {
     static var previews: some View {
-        PopularItemRowView(selectedFilterNum: 1)
+        ContentView()
     }
 }
