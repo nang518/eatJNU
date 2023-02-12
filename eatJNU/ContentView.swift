@@ -58,25 +58,15 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var vm = Network()
     var body: some View {
-        ScrollView {
-            Text("바보")
-            ForEach(vm.posts.items) { post in
-                VStack(spacing: 10) {
-                    Text(post.name)
-                        .font(Font.title.bold())
-                    
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-            }
-        }
+        MainView()
+        
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            PopularItemRowView()
+            ContentView()
         }
         }
        

@@ -16,7 +16,7 @@ class Network: ObservableObject {
     }
     
     func getPosts() {
-        guard let url = URL(string: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceList/0") else { return }
+        guard let url = URL(string: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceList/1") else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
                 print("데이터가 존재하지 않습니다")
@@ -40,7 +40,7 @@ class Network: ObservableObject {
             print("데이터 다운로드 성공")
             
             let jsonString = String(data: data, encoding: .utf8)
-//          print(jsonString)
+//            print(jsonString)
                         
             guard let newPost = try? JSONDecoder().decode(ItemResponse.self, from: data) else { return }
             DispatchQueue.main.async { [weak self] in

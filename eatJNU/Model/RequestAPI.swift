@@ -19,6 +19,6 @@ struct Item: Identifiable, Codable {
     let name: String
     let image: String
     let reviewCount, likeCount: Int
-    let tags: String
+    let tags: String?
     let filter: String
 }

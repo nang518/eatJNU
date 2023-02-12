@@ -57,11 +57,6 @@ struct SearchView: View {
                 }
                 .listStyle(PlainListStyle())
             }
-            
-            
-            
-            
-            
         }
         .navigationTitle("검색")
         .navigationBarItems(leading: btnBack)
@@ -71,7 +66,7 @@ struct SearchView: View {
     var btnBack: some View{
         Button(action:{self.presentationMode.wrappedValue.dismiss()}){
             HStack{
-                Image(systemName: "chevron.backward.circle")
+                Image(systemName: "chevron.backward")
                     .font(.system(size: 20, weight: .light))
                     .foregroundColor(.black)
             }

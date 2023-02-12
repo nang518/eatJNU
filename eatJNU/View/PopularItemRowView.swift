@@ -44,14 +44,15 @@ struct PopularItemRowView: View {
                                 
                                 Text("리뷰 \(post.reviewCount)")
                                     .font(.system(size: 14))
-                                    .foregroundColor(Color(.systemGray2))
+                                    .foregroundColor(.gray)
+                                    
                                 
                                 
                             }
                         
-                            Text(post.tags)
-                                .foregroundColor(.gray)
-                                .font(.system(size: 12))
+//                            Text(post.tags)
+//                                .foregroundColor(Color(.systemGray2))
+//                                .font(.system(size: 12))
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
