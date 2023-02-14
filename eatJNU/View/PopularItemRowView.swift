@@ -28,7 +28,7 @@ struct PopularItemRowView: View {
 
                 if (selectedFilterNum == 1) {
                     if (post.filter == "맛집") {
-                        HStack(spacing: 2) {
+                        HStack {
                             URLImage(url){ image in
                                 image
                                     .resizable()
@@ -43,6 +43,7 @@ struct PopularItemRowView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.black)
 
 
                                 HStack {
@@ -51,6 +52,7 @@ struct PopularItemRowView: View {
 
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
+                                        .foregroundColor(.black)
 
 
                                     Text("리뷰 \(post.reviewCount)")
@@ -90,6 +92,7 @@ struct PopularItemRowView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.black)
 
 
                                 HStack {
@@ -98,6 +101,7 @@ struct PopularItemRowView: View {
 
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
+                                        .foregroundColor(.black)
 
 
                                     Text("리뷰 \(post.reviewCount)")
@@ -134,6 +138,7 @@ struct PopularItemRowView: View {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(post.name)
                                     .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.black)
 
 
                                 HStack {
@@ -142,6 +147,7 @@ struct PopularItemRowView: View {
 
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
+                                        .foregroundColor(.black)
 
 
                                     Text("리뷰 \(post.reviewCount)")
@@ -177,6 +183,7 @@ struct PopularItemRowView: View {
                         VStack(alignment: .leading, spacing: 2) {
                             Text(post.name)
                                 .font(.system(size: 16, weight: .bold))
+                                .foregroundColor(.black)
 
 
                             HStack {
@@ -185,6 +192,7 @@ struct PopularItemRowView: View {
 
                                 Text("\(post.likeCount)")
                                     .font(.custom("BMDOHYEON-OTF", size: 14))
+                                    .foregroundColor(.black)
 
 
                                 Text("리뷰 \(post.reviewCount)")

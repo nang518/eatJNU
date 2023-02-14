@@ -82,12 +82,18 @@ struct ListView: View {
                 })
                 
                 ScrollView(showsIndicators: false) {
-                    HStack(spacing: 20) {
+                    NavigationLink(destination: DetailView()) {
                         PopularItemRowView(
                             selectedFilterNum: selectedFilterNum,
                             areaType: areaTypeNum
                         )
                     }
+                    //HStack(spacing: 20) {
+//                        PopularItemRowView(
+//                            selectedFilterNum: selectedFilterNum,
+//                            areaType: areaTypeNum
+//                        )
+                    //}
                 }
             }
             .padding(.horizontal, 16)
