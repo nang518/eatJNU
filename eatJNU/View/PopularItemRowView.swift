@@ -29,49 +29,49 @@ struct PopularItemRowView: View {
                 if (selectedFilterNum == 1) {
                     if (post.filter == "맛집") {
                         HStack {
-                            URLImage(url){ image in
-                                image
-                                    .resizable()
-                                    .frame(width: 88, height: 88)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 24)
-                                            .stroke(Color.black, lineWidth: 2)
-                                    )
-                                    .cornerRadius(24)
-                            }
+                            NavigationLink(destination: DetailView(id: post.id)) {
+                                URLImage(url){ image in
+                                    image
+                                        .resizable()
+                                        .frame(width: 88, height: 88)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 24)
+                                                .stroke(Color.black, lineWidth: 2)
+                                        )
+                                        .cornerRadius(24)
+                                }
 
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(post.name)
-                                    .font(.system(size: 16, weight: .bold))
-                                    .foregroundColor(.black)
-
-
-                                HStack {
-                                    Image("like2")
-                                        .frame(width: 16, height: 16)
-
-                                    Text("\(post.likeCount)")
-                                        .font(.custom("BMDOHYEON-OTF", size: 14))
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(post.name)
+                                        .font(.system(size: 16, weight: .bold))
                                         .foregroundColor(.black)
 
 
-                                    Text("리뷰 \(post.reviewCount)")
-                                        .font(.system(size: 14))
-                                        .foregroundColor(.gray)
+                                    HStack {
+                                        Image("like2")
+                                            .frame(width: 16, height: 16)
+
+                                        Text("\(post.likeCount)")
+                                            .font(.custom("BMDOHYEON-OTF", size: 14))
+                                            .foregroundColor(.black)
 
 
-
+                                        Text("리뷰 \(post.reviewCount)")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.gray)
+                                    }
+                                        
+                                    if (post.tags != nil) {
+                                        Text(post.tags!)
+                                            .foregroundColor(Color(.systemGray2))
+                                            .font(.system(size: 12))
+                                            .multilineTextAlignment(.leading)
+                                    }
                                 }
-                                
-                                if (post.tags != nil) {
-                                    Text(post.tags!)
-                                        .foregroundColor(Color(.systemGray2))
-                                        .font(.system(size: 12))
-                                }
-                                
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
+                            
                         }
                     }
                 }
