@@ -10,11 +10,11 @@ import Foundation
 // MARK: - Welcome
 struct ItemResponse: Codable {
     let count: Int
-    let items: [Item]
+    let items: [PostItem]
 }
 
 // MARK: - Item
-struct Item: Identifiable, Codable {
+struct PostItem: Identifiable, Codable {
     let id: Int
     let name: String
     let image: String
