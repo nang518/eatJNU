@@ -17,7 +17,7 @@ struct MainView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .padding(.top,64)
-                
+           
                 Text("전대 밥토끼")
                     .font(.custom("BMDoHyeon-OTF", size:48))
                     .padding(.bottom, 4)

@@ -64,8 +64,7 @@ struct ListView: View {
                                         .foregroundColor(.black)
                                 }
                                 .padding(.vertical, 6)
-                                .padding(.horizontal, 10
-                                )
+                                .padding(.horizontal, 10)
                                 .background(Color.gray.opacity(0.08))
                                 .clipShape(Capsule())
                                 .shadow(color: Color.black.opacity(0.05), radius: 5, x: 5, y: 5)
