@@ -23,15 +23,19 @@ struct PopularItemRowView: View {
     var body: some View {
         VStack {
             if (selectedFilterNum == 1) {
+                Spacer()
                 FilterItem(filter: "맛집")
             }
             else if (selectedFilterNum == 2) {
+                Spacer()
                 FilterItem(filter: "술집")
             }
             else if (selectedFilterNum == 3) {
+                Spacer()
                 FilterItem(filter: "카페")
             }
             else if (selectedFilterNum == 0) {
+                Spacer()
                 WholeItem()
             }
         }
@@ -64,8 +68,9 @@ struct PopularItemRowView: View {
                                     .foregroundColor(.black)
                                 
                                 HStack {
-                                    Image("like2")
-                                        .frame(width: 16, height: 16)
+                                    Image("heart")
+                                        .resizable()
+                                        .frame(width: 18, height: 18)
                                     
                                     Text("\(post.likeCount)")
                                         .font(.custom("BMDOHYEON-OTF", size: 14))
@@ -73,20 +78,23 @@ struct PopularItemRowView: View {
                                     
                                     Text("리뷰 \(post.reviewCount)")
                                         .font(.system(size: 14))
-                                        .foregroundColor(.gray)
+                                        .foregroundColor(Color("reviewColor"))
                                 }
+                                Spacer()
+                                    .frame(height: 1)   
                                 
                                 if (post.tags != nil) {
                                     Text(post.tags!)
-                                        .foregroundColor(Color(.systemGray2))
+                                        .foregroundColor(Color("tagColor"))
                                         .font(.system(size: 12))
                                         .multilineTextAlignment(.leading)
                                 }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
+                            
                         }
                     }
+                    .padding(.vertical, 4)
                 }
             }
         }
@@ -121,8 +129,9 @@ struct PopularItemRowView: View {
                                 .foregroundColor(.black)
                             
                             HStack {
-                                Image("like2")
-                                    .frame(width: 16, height: 16)
+                                Image("heart")
+                                    .resizable()
+                                    .frame(width: 18, height: 18)
                                 
                                 Text("\(post.likeCount)")
                                     .font(.custom("BMDOHYEON-OTF", size: 14))
@@ -130,18 +139,20 @@ struct PopularItemRowView: View {
                                 
                                 Text("리뷰 \(post.reviewCount)")
                                     .font(.system(size: 14))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(Color("reviewColor"))
                             }
+                            Spacer()
+                                .frame(height: 1)
                             
                             if (post.tags != nil) {
                                 Text(post.tags!)
-                                    .foregroundColor(Color(.systemGray2))
+                                    .foregroundColor(Color("tagColor"))
                                     .font(.system(size: 12))
                                     .multilineTextAlignment(.leading)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding()
+                        //.padding()
                     }
                 }
             }

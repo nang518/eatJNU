@@ -11,56 +11,73 @@ import URLImage
 struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding <PresentationMode>
     @StateObject var viewModel = DetailNetwork()
-
+    @State var reviewInsert : String = ""
     var id: Int
+    
     var body: some View {
         VStack {
-            //let urlStr = viewModel.details.image.replacingOccurrences(of: "", with: "")
-            let url = URL(string: viewModel.details.image)!
+            //URLImage
+            let newStr = viewModel.details.image.replacingOccurrences(of: " ", with: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            let url = URL(string: newStr)
             
-            URLImage(url) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+            if (url != nil){
+                URLImage(url!) { image in
+                    image
+                        .resizable()
+                        .frame(maxWidth: .infinity)
+                }
+                .padding(.vertical, 4)
             }
-       
-            HStack {
-                Text(viewModel.details.name)
-                    .font(.system(size: 32))
-                    .bold()
-                Spacer()
-            }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 32)
+            //이미지가 없을 경우 기본 이미지 주소
+            //            else {
+            //                URLImage("") { image in
+            //                    image
+            //                        .resizable()
+            //                }
+            //            }
             
-            HStack {
-                Image(systemName: "heart")
-                Text("\(viewModel.details.likeCount)개")
-                Image(systemName: "pencil")
-                Text("\(viewModel.details.reviewCount)개")
-                Spacer()
-            }
-            .padding(.vertical, 4)
-            .padding(.horizontal, 32)
-            
-            HStack {
-                Text(viewModel.details.location)
-                Spacer()
-            }
-            .padding(.horizontal, 32)
-            
-            Divider()
-                .frame(minHeight: 8)
-                .overlay(Color(.systemGray5))
+            VStack {
+                HStack {
+                    Text(viewModel.details.name)
+                        .font(.system(size: 24))
+                        .bold()
+                    Spacer()
+                }
+                .padding(.vertical, 4)
                 
-            
+                HStack {
+                    Image("heart")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                    Text("\(viewModel.details.likeCount)개")
+                    Image("chat")
+                        .resizable()
+                        .frame(width: 24, height: 24)
+                    Text("\(viewModel.details.reviewCount)개")
+                    Spacer(minLength: 4)
+                }
+                .padding(.vertical, 4)
+                
+                HStack {
+                    Text(viewModel.details.location)
+                    Spacer()
+                }
+            }
+            .padding(.horizontal, 32)
+            .padding(.vertical, 4)
+        }
+        
+        Divider()
+            .frame(minHeight: 8)
+            .overlay(Color(.systemGray5))
+        
+        VStack(alignment: .leading) {
             HStack {
                 Text("매장 정보")
                     .bold()
                     .font(.system(size: 20))
                 Spacer()
             }
-            .padding(.horizontal, 32)
             .padding(.vertical, 4)
             
             HStack {
@@ -68,14 +85,52 @@ struct DetailView: View {
                 Text(viewModel.details.openingInfo)
                 Spacer()
             }
-            .padding(.horizontal, 32)
+            .padding(.vertical, 4)
             
             HStack {
                 Image(systemName: "phone.fill")
                 Text(viewModel.details.number)
                 Spacer()
             }
+            .padding(.vertical, 4)
+            
+            Text(viewModel.details.tags)
+                .foregroundColor(Color("tagColor"))
+                .font(.system(size: 14))
+                //.frame(alignment: .leading)
+            
+            
+        }
+        .padding(.horizontal, 32)
+        .padding(.vertical, 4)
+        
+        Divider()
+            .frame(minHeight: 8)
+            .overlay(Color(.systemGray5))
+        
+        VStack {
+            HStack {
+                Text("리뷰")
+                    .bold()
+                    .font(.system(size: 20))
+                Spacer()
+
+                Text("리뷰 작성")
+                    .foregroundColor(Color(.systemGray3))
+                    .font(.system(size: 16))
+            }
             .padding(.horizontal, 32)
+            .padding(.vertical, 4)
+            
+            HStack {
+                TextField("", text: .constant("댓글을 입력해주세요 :)")).foregroundColor(Color.gray)
+                Image(systemName: "paperplane")
+            }
+            .padding()
+            .overlay(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(Color(.systemGray5)))
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            
         }
         .onAppear {
             //뷰가 그려지기 전에 호출

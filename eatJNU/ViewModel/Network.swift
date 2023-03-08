@@ -79,13 +79,13 @@ class DetailNetwork: ObservableObject {
             print("데이터 다운로드 성공")
 
             let jsonString = String(data: data, encoding: .utf8)
-            print(jsonString)
+            //print(jsonString)
 
             guard let newDetail = try? JSONDecoder().decode(DetailItem.self, from: data) else { return }
             DispatchQueue.main.async { [weak self] in
 
                 self?.details = newDetail
-                print(self?.details)
+                //print(self?.details)
 
             }
         }

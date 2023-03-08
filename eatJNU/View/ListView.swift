@@ -24,8 +24,6 @@ struct ListView: View {
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack(spacing: 15) {
                         ForEach(categories.indices) { index in
-                            
-                            
                             if (selectedFilterNum == index) {
                                 // 선택된 필터를 처리
                                 HStack(spacing: 10) {
@@ -76,8 +74,6 @@ struct ListView: View {
                             }
                         }
                     }
-                    .padding(.horizontal)
-                    
                 })
                 
                 ScrollView(showsIndicators: false) {
@@ -85,13 +81,16 @@ struct ListView: View {
                             selectedFilterNum: selectedFilterNum,
                             areaTypeNum: areaTypeNum
                         )
+                        
                 }
+                .padding(.horizontal, 16)
             }
-            .padding(.horizontal, 16)
+           
                 
         }
         .navigationBarItems(leading: btnBack)
         .navigationBarBackButtonHidden(true)
+        
     }
     
     var btnBack: some View{

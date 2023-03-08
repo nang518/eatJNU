@@ -40,8 +40,6 @@ struct MainView: View {
             }
             
             .padding(.horizontal, 16)
-            .navigationBarItems(trailing: searchButton())
-            .navigationBarItems(trailing: plusButton())
         }
     }
     
@@ -57,7 +55,7 @@ struct MainView: View {
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
+                        .stroke(Color.black, lineWidth: 2)
                 )
         }
     }
@@ -74,7 +72,7 @@ struct MainView: View {
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
+                        .stroke(Color.black, lineWidth: 2)
                 )
         }
     }
@@ -91,35 +89,10 @@ struct MainView: View {
                 .cornerRadius(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.black, lineWidth: 4)
+                        .stroke(Color.black, lineWidth: 2)
                 )
         }
     }
-    
-    @ViewBuilder
-    func searchButton() -> some View {
-        NavigationLink(destination: SearchView()) {
-            Image(systemName: "magnifyingglass")
-                .font(.system(size: 20, weight: .light))
-                .foregroundColor(Color.black)
-            
-        }
-        
-    }
-    
-    @ViewBuilder
-    func plusButton() -> some View {
-        Button {
-            
-        } label: {
-            Image(systemName: "plus")
-                .font(.system(size:20, weight: .light))
-                .foregroundColor(Color.black)
-        }
-        
-    }
-    
-    
 }
 
 struct MainView_Previews: PreviewProvider {
