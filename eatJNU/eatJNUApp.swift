@@ -10,9 +10,12 @@ import SwiftUI
 @main
 struct eatJNUApp: App {
     var body: some Scene {
+        //let urlImageService = URLImageService(fileStore: nil, inMemoryStore: URLImageInMemoryStore())
+
         WindowGroup {
             NavigationView {
                MainView()
+//                    .environment(\.urlImageService, urlImageService)
             }
             
         }

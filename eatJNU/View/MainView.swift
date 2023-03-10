@@ -7,8 +7,10 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    private var userId: String = ""
+    
     var body: some View {
-        
         ZStack {
             Color.white.ignoresSafeArea()
             
@@ -92,6 +94,17 @@ struct MainView: View {
                         .stroke(Color.black, lineWidth: 2)
                 )
         }
+    }
+    
+    init() {
+        userId = GetOrCreateId()
+    }
+    
+    func GetOrCreateId() -> String {
+        if(S_Keychain().getDeviceID() == ""){
+            S_Keychain().createDeviceID()
+        }
+        return S_Keychain().getDeviceID()
     }
 }
 

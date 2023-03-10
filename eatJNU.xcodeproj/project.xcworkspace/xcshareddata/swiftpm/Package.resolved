@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "takuuid",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/taka0125/TAKUUID.git",
+      "state" : {
+        "revision" : "5eab7cd648fc4f6dc5844438fed8eaafb0e48063",
+        "version" : "1.6.0"
+      }
+    },
+    {
       "identity" : "url-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dmytro-anokhin/url-image",

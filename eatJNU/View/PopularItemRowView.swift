@@ -107,7 +107,7 @@ struct PopularItemRowView: View {
     func WholeItem() -> some View {
         VStack {
             ForEach(viewModel.posts.items) { post in
-                let urlStr = post.image.replacingOccurrences(of: "", with: "")
+                let urlStr = post.image.replacingOccurrences(of: " ", with: "")
                 let url = URL(string: urlStr)!
                 
                 HStack(spacing: 2) {

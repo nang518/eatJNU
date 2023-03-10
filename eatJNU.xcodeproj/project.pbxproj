@@ -17,6 +17,8 @@
 		B73E351C2992407000E85C80 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73E351B2992407000E85C80 /* DetailView.swift */; };
 		B73E353129936A3400E85C80 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73E353029936A3400E85C80 /* Category.swift */; };
 		B73E35352993781500E85C80 /* PopularItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73E35342993781500E85C80 /* PopularItemRowView.swift */; };
+		B7484C8029BB310B004476E5 /* TAKUUID in Frameworks */ = {isa = PBXBuildFile; productRef = B7484C7F29BB310B004476E5 /* TAKUUID */; };
+		B7484C8829BB3EAE004476E5 /* keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7484C8729BB3EAE004476E5 /* keychain.swift */; };
 		B75D265B2991699E00A0B641 /* BMDOHYEON_otf.otf in Resources */ = {isa = PBXBuildFile; fileRef = B75D265A2991699E00A0B641 /* BMDOHYEON_otf.otf */; };
 		B7C5C3BA299388840056B0B0 /* RequestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C5C3B9299388840056B0B0 /* RequestAPI.swift */; };
 		B7C5C3BC299388CA0056B0B0 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C5C3BB299388CA0056B0B0 /* Network.swift */; };
@@ -36,6 +38,8 @@
 		B73E351B2992407000E85C80 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		B73E353029936A3400E85C80 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		B73E35342993781500E85C80 /* PopularItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularItemRowView.swift; sourceTree = "<group>"; };
+		B7484C7D29BB30CA004476E5 /* eatJNU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = eatJNU.entitlements; sourceTree = "<group>"; };
+		B7484C8729BB3EAE004476E5 /* keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keychain.swift; sourceTree = "<group>"; };
 		B75D265A2991699E00A0B641 /* BMDOHYEON_otf.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BMDOHYEON_otf.otf; sourceTree = "<group>"; };
 		B75D265C29916C0500A0B641 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B7C5C3B9299388840056B0B0 /* RequestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAPI.swift; sourceTree = "<group>"; };
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7484C8029BB310B004476E5 /* TAKUUID in Frameworks */,
 				B7C5C3C12993AD4E0056B0B0 /* URLImageStore in Frameworks */,
 				B7C5C3BF2993AD4E0056B0B0 /* URLImage in Frameworks */,
 			);
@@ -74,6 +79,8 @@
 		B7045D5A299161DC009D3E66 /* eatJNU */ = {
 			isa = PBXGroup;
 			children = (
+				B7484C8929BB3EB6004476E5 /* Manager */,
+				B7484C7D29BB30CA004476E5 /* eatJNU.entitlements */,
 				B73E35272992768300E85C80 /* Model */,
 				B73E35222992506300E85C80 /* ViewModel */,
 				B75D265C29916C0500A0B641 /* Info.plist */,
@@ -110,7 +117,6 @@
 		B73E35222992506300E85C80 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				B7C5C3BB299388CA0056B0B0 /* Network.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -119,9 +125,18 @@
 			isa = PBXGroup;
 			children = (
 				B73E353029936A3400E85C80 /* Category.swift */,
-				B7C5C3B9299388840056B0B0 /* RequestAPI.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		B7484C8929BB3EB6004476E5 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				B7C5C3BB299388CA0056B0B0 /* Network.swift */,
+				B7C5C3B9299388840056B0B0 /* RequestAPI.swift */,
+				B7484C8729BB3EAE004476E5 /* keychain.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		B75D26592991696700A0B641 /* font */ = {
@@ -151,6 +166,7 @@
 			packageProductDependencies = (
 				B7C5C3BE2993AD4E0056B0B0 /* URLImage */,
 				B7C5C3C02993AD4E0056B0B0 /* URLImageStore */,
+				B7484C7F29BB310B004476E5 /* TAKUUID */,
 			);
 			productName = eatJNU;
 			productReference = B7045D58299161DC009D3E66 /* eatJNU.app */;
@@ -182,6 +198,7 @@
 			mainGroup = B7045D4F299161DC009D3E66;
 			packageReferences = (
 				B7C5C3BD2993AD4E0056B0B0 /* XCRemoteSwiftPackageReference "url-image" */,
+				B7484C7E29BB310B004476E5 /* XCRemoteSwiftPackageReference "TAKUUID" */,
 			);
 			productRefGroup = B7045D59299161DC009D3E66 /* Products */;
 			projectDirPath = "";
@@ -210,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7484C8829BB3EAE004476E5 /* keychain.swift in Sources */,
 				B73E35352993781500E85C80 /* PopularItemRowView.swift in Sources */,
 				B73E3516299188DC00E85C80 /* SearchView.swift in Sources */,
 				B73E351C2992407000E85C80 /* DetailView.swift in Sources */,
@@ -345,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = eatJNU/eatJNU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eatJNU/Preview Content\"";
@@ -375,6 +394,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = eatJNU/eatJNU.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"eatJNU/Preview Content\"";
@@ -424,6 +444,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B7484C7E29BB310B004476E5 /* XCRemoteSwiftPackageReference "TAKUUID" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/taka0125/TAKUUID.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		B7C5C3BD2993AD4E0056B0B0 /* XCRemoteSwiftPackageReference "url-image" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
@@ -435,6 +463,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B7484C7F29BB310B004476E5 /* TAKUUID */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7484C7E29BB310B004476E5 /* XCRemoteSwiftPackageReference "TAKUUID" */;
+			productName = TAKUUID;
+		};
 		B7C5C3BE2993AD4E0056B0B0 /* URLImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B7C5C3BD2993AD4E0056B0B0 /* XCRemoteSwiftPackageReference "url-image" */;
