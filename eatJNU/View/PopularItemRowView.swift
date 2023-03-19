@@ -13,10 +13,12 @@ struct PopularItemRowView: View {
 
     private var selectedFilterNum: Int
     private var areaTypeNum: Int
+    private var userId: String
 
-    init(selectedFilterNum: Int, areaTypeNum: Int) {
+    init(selectedFilterNum: Int, areaTypeNum: Int, userId: String) {
         self.selectedFilterNum = selectedFilterNum
         self.areaTypeNum = areaTypeNum
+        self.userId = userId
     }
 
     
@@ -50,7 +52,7 @@ struct PopularItemRowView: View {
                 
                 if(filter == post.filter) {
                     HStack(spacing: 2) {
-                        NavigationLink(destination: DetailView(id: post.id)) {
+                        NavigationLink(destination: DetailView(id: post.id, userId: userId)) {
                             URLImage(url) { image in
                                 image
                                     .resizable()
@@ -111,7 +113,7 @@ struct PopularItemRowView: View {
                 let url = URL(string: urlStr)!
                 
                 HStack(spacing: 2) {
-                    NavigationLink(destination: DetailView(id: post.id)) {
+                    NavigationLink(destination: DetailView(id: post.id, userId: userId)) {
                         URLImage(url) { image in
                             image
                                 .resizable()

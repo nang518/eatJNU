@@ -11,10 +11,13 @@ struct ListView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State var selectedCategory: Category = categories.first!
     @State var selectedFilterNum: Int = 1
-    var areaTypeNum: Int
     
-    init(areaType: Int) {
+    var areaTypeNum: Int
+    var userId: String
+    
+    init(areaType: Int, userId: String) {
         self.areaTypeNum = areaType
+        self.userId = userId
     }
     
     var body: some View {
@@ -79,7 +82,8 @@ struct ListView: View {
                 ScrollView(showsIndicators: false) {
                         PopularItemRowView(
                             selectedFilterNum: selectedFilterNum,
-                            areaTypeNum: areaTypeNum
+                            areaTypeNum: areaTypeNum,
+                            userId: userId
                         )
                         
                 }

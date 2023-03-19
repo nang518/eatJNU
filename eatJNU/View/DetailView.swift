@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
-import URLImage
 
-
-struct DetailView: View {
+    struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode: Binding <PresentationMode>
     @StateObject var viewModel = DetailNetwork()
+    @StateObject var userModel = UserNetwork()
+    @State var isFavorite: Bool = false
     var id: Int
+    var userId: String
     
     var body: some View {
         ScrollView {
@@ -21,13 +22,6 @@ struct DetailView: View {
                 //URLImage
                 let urlStr = viewModel.details.image
                 if let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let myURL = URL(string: encodedStr) {
-                    //let _ = print(myURL)
-//                    URLImage(myURL) { image in
-//                        image
-//                            .resizable()
-//                            .frame(height: 400)
-//
-//                    }
                     AsyncImage(url: myURL) { phase in
                         if let image = phase.image {
                             image
@@ -38,38 +32,10 @@ struct DetailView: View {
                         else if phase.error != nil {
                             Text(phase.error?.localizedDescription ?? "error")
                                 .foregroundColor(.pink)
-                                
                         }
                     }
-                    
                 }
                 
-                let uuid = UUID().uuidString
-                
-                let _ = print(uuid)
-                
-//                let url =  URL(string: encodedStr)!
-//                let _ = print(url.absoluteString)
-                
-//                if (url != nil){
-//                    URLImage(url!) { image in
-//                        image
-//                            .resizable()
-//                            .frame(height: 400)
-//                    }
-//                    .padding(.vertical, 4)
-//                }
-                
-                
-                //github.com/younhwan97/eatJNU/blob/main/preview/image1.jpeg?raw=true
-                //이미지가 없을 경우 기본 이미지 주소
-                //            else {
-                //                URLImage("") { image in
-                //                    image
-                //                        .resizable()
-                //                }
-                //            }
-            
                 HStack {
                     Text(viewModel.details.name)
                         .font(.system(size: 24))
@@ -141,11 +107,11 @@ struct DetailView: View {
             //리뷰
             VStack {
                 HStack {
-                    Text("리뷰")
+                    Text("리뷰 (\(viewModel.details.reviewCount))")
                         .bold()
                         .font(.system(size: 20))
                     Spacer()
-
+                    
                     Text("리뷰 작성")
                         .foregroundColor(Color(.systemGray3))
                         .font(.system(size: 16))
@@ -162,18 +128,44 @@ struct DetailView: View {
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
                 
-                
+                VStack(alignment: .leading) {
+                    let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale"]
+                    ForEach(viewModel.details.reviews, id: \.self) { review in
+                        HStack {
+                            Image(randomImage[review.comment.count % randomImage.count])
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            VStack {
+                                Text("익명")
+                                    .font(.system(size: 14))
+                                    .bold()
+                                    .padding(.vertical, 2)
+                                Spacer()
+                                Text(review.comment)
+                                    .font(.system(size: 12))
+                            }
+                            
+                        }
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
                 
             }
+            
+            
+            .task {
+                //뷰가 그려지기 전에 호출
+                viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceDetail/\(id)")
+                userModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)")
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle(viewModel.details.name)
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: btnBack)
+            .navigationBarItems(trailing: btnFavorite)
+            
         }
-        .task {
-            //뷰가 그려지기 전에 호출
-            viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceDetail/\(id)")
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationTitle(viewModel.details.name)
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading: btnBack)   
     }
     
     var btnBack: some View {
@@ -185,21 +177,30 @@ struct DetailView: View {
             }
         }
     }
-
-//    var btnHeart: some View {
-//        if(self.isFavorite) {
-//            Image(systemName: "heart.fill")
-//                .foregroundColor(.red)
-//        } else {
-//            Image(systemName: "heart")
-//                .foregroundColor(.black)
-//
+    
+    var btnFavorite: some View {
+        Button {
+            isFavorite.toggle()
+            
+        } label: {
+            Label("", systemImage: isFavorite ? "heart.fill" : "heart")
+                .labelStyle(.iconOnly)
+                .foregroundColor(isFavorite ? .red : .black)
+        }
+    }
+    
+//    @ViewBuilder
+//    func btnFavorite() -> some View {
+//        Button {
+//            isFavorite.toggle()
+//        } label: {
+//            Label("", systemImage: isFavorite ? "heart.fill" : "heart")
+//                .labelStyle(.iconOnly)
+//                .foregroundColor(isFavorite ? .red : .black)
 //        }
 //    }
 }
-
-
-
+   
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()

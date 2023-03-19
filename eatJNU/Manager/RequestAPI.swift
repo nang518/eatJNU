@@ -9,10 +9,9 @@ import Foundation
 
 // MARK: - Welcome
 struct ItemResponse: Codable {
-    let count: Int
     let items: [PostItem]
     
-    static let sample = ItemResponse(count: 0, items: [])
+    static let sample = ItemResponse(items: [])
 }
 
 // MARK: - Item
@@ -47,9 +46,20 @@ struct placeImage: Codable {
     let url: String
 }
 
-struct reviewInfo: Codable {
+struct reviewInfo: Codable, Hashable {
     let comment: String
     let writingTime: String
     var userId: String?
     let likeCount: Int
+}
+
+struct LikePlace: Codable {
+    let items: [FavoriteInfo]
+    
+    static let sample = LikePlace(items: [favoriteSample])
+    static let favoriteSample = FavoriteInfo(placeId: 0)
+}
+
+struct FavoriteInfo: Hashable, Codable {
+    let placeId: Int
 }
