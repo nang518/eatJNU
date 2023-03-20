@@ -84,8 +84,7 @@ class DetailNetwork: ObservableObject {
             DispatchQueue.main.async { [weak self] in
 
                 self?.details = newDetail
-                //print(self?.details)
-
+                // print(self?.details)
             }
         }
         .resume()
@@ -94,8 +93,9 @@ class DetailNetwork: ObservableObject {
 
 class UserNetwork: ObservableObject {
     @Published var userInfo : LikePlace = LikePlace.sample
+    @Published var isLikePlace : Bool = false
     
-    func getPosts(url: String) {
+    func getPosts(url: String, placeId: Int) {
         guard let url = URL(string: url) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data else {
@@ -126,9 +126,108 @@ class UserNetwork: ObservableObject {
             DispatchQueue.main.async { [weak self] in
 
                 self?.userInfo = newUserInfo
-                //print(self?.details)
+                
+                for item in newUserInfo.items {
+                    if (item.placeId == placeId) {
+                        self?.isLikePlace.toggle()
+                        break
+                    }
+                }
             }
         }
         .resume()
     }
+    
+    func putMethod(url: String) {
+            guard let url = URL(string: url) else {
+                print("Error: cannot create URL")
+                return
+            }
+                                    
+            // Create the request
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling PUT")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                do {
+                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                        print("Error: Cannot convert data to JSON object")
+                        return
+                    }
+                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                        print("Error: Cannot convert JSON object to Pretty JSON data")
+                        return
+                    }
+                    guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                        print("Error: Could print JSON in String")
+                        return
+                    }
+                    
+                    print(prettyPrintedJson)
+                } catch {
+                    print("Error: Trying to convert JSON data to string")
+                    return
+                }
+            }.resume()
+        }
+    
+    func deleteMethod(url: String) {
+            guard let url = URL(string: url) else {
+                print("Error: cannot create URL")
+                return
+            }
+                                    
+            // Create the request
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                guard error == nil else {
+                    print("Error: error calling PUT")
+                    print(error!)
+                    return
+                }
+                guard let data = data else {
+                    print("Error: Did not receive data")
+                    return
+                }
+                guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
+                    print("Error: HTTP request failed")
+                    return
+                }
+                do {
+                    guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                        print("Error: Cannot convert data to JSON object")
+                        return
+                    }
+                    guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
+                        print("Error: Cannot convert JSON object to Pretty JSON data")
+                        return
+                    }
+                    guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
+                        print("Error: Could print JSON in String")
+                        return
+                    }
+                    
+                    print(prettyPrintedJson)
+                } catch {
+                    print("Error: Trying to convert JSON data to string")
+                    return
+                }
+            }.resume()
+        }
 }
+

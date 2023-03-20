@@ -45,7 +45,7 @@ struct PopularItemRowView: View {
     
     @ViewBuilder
     func FilterItem(filter: String) -> some View {
-        VStack { 
+        VStack {
             ForEach(viewModel.posts.items) { post in
                 let urlStr = post.image.replacingOccurrences(of: "", with: "")
                 let url = URL(string: urlStr)!
@@ -159,9 +159,6 @@ struct PopularItemRowView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceDetail/\(areaTypeNum)")
-        }
     }
 }
 
@@ -170,3 +167,5 @@ struct PopularItemRowView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+

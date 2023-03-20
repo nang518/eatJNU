@@ -60,6 +60,10 @@ struct LikePlace: Codable {
     static let favoriteSample = FavoriteInfo(placeId: 0)
 }
 
-struct FavoriteInfo: Hashable, Codable {
+struct FavoriteInfo: Hashable, Codable, Identifiable {
+    var id: Int {
+        self.placeId
+    }
+    
     let placeId: Int
 }
