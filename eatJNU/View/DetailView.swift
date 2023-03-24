@@ -11,6 +11,7 @@ import SwiftUI
     @Environment(\.presentationMode) var presentationMode: Binding <PresentationMode>
     @StateObject var viewModel = DetailNetwork()
     @StateObject var userModel = UserNetwork()
+    @State var text: String = ""
     var id: Int
     var userId: String
         
@@ -115,22 +116,56 @@ import SwiftUI
                         .bold()
                         .font(.system(size: 20))
                     Spacer()
-                    
-                    Text("리뷰 작성")
-                        .foregroundColor(Color(.systemGray3))
-                        .font(.system(size: 16))
                 }
                 //.padding(.horizontal, 32)
                 //.padding(.vertical, 4)
                 
                 HStack {
-                    TextField("", text: .constant("댓글을 입력해주세요 :)")).foregroundColor(Color.gray)
-                    Image(systemName: "paperplane")
+                    if (viewModel.alreadyWrittenReview) {
+                        TextField("", text: .constant("이미 리뷰를 입력하셨습니다!"))
+                            .foregroundColor(Color("addReviewText"))
+                        
+                            
+                        Button {
+                            
+                        } label: {
+                            Image(systemName: "paperplane")
+                                .foregroundColor(Color("addReviewText"))
+                        }
+                    } else {
+                        
+                        TextField("리뷰를 입력해주세요 :)", text: $text)
+//                            .foregroundColor(Color("addReviewText"))
+                            .foregroundColor(.black)
+                            .background(Color("addReviewBackground"))
+                        
+                        Button {
+                            if (5 <= text.count) {
+                                if (text.count <= 99) {
+                                    viewModel.postReview(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceReview", userId: userId, placeId: id, comment: text)
+                                    text = ""
+                                }
+                                else {
+                                    // 100자 초과
+                                }
+                            } else { //5자 미만
+                                
+                            }
+                            
+                        } label: {
+                            Image(systemName: "paperplane")
+                                .foregroundColor(.black)
+                        }
+                    }
+                
+                    
+
+                    
                 }
                 .padding()
-                .overlay(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(Color(.systemGray5)))
-                //.padding(.horizontal, 8)
-                //.padding(.vertical, 4)
+                .overlay(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 2).foregroundColor(Color("addReviewBackground")))
+                .background(Color("addReviewBackground"))
+                
                 
                 let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale"]
                 ForEach(viewModel.details.reviews, id: \.self) { review in
@@ -156,14 +191,14 @@ import SwiftUI
             
             .task {
                 //뷰가 그려지기 전에 호출
-                viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceDetail/\(id)")
-                userModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)", placeId: id)
+                viewModel.getPosts(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/PlaceDetail/\(id)", userId: userId)
+                viewModel.checkisLikePlace(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)", placeId: id)
             }
             .navigationBarBackButtonHidden(true)
             .navigationTitle(viewModel.details.name)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: btnBack)
-            .navigationBarItems(trailing: userModel.isLikePlace ? AnyView(btnClickedFavorite) : AnyView(btnFavorite))
+            .navigationBarItems(trailing: viewModel.isLikePlace ? AnyView(btnClickedFavorite) : AnyView(btnFavorite))
             
         }
     }
@@ -180,8 +215,8 @@ import SwiftUI
     
     var btnClickedFavorite: some View {
         Button {
-            userModel.deleteMethod(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)/\(id)")
-            userModel.isLikePlace.toggle()
+            viewModel.deleteFavoritePlace(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)/\(id)")
+            viewModel.isLikePlace.toggle()
         } label: {
             Image(systemName: "heart.fill")
                 .foregroundColor(.red)
@@ -190,27 +225,13 @@ import SwiftUI
     
     var btnFavorite: some View {
         Button {
-            userModel.putMethod(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)/\(id)")
-            userModel.isLikePlace.toggle()
+            viewModel.putFavoritePlace(url: "http://ec2-15-164-250-158.ap-northeast-2.compute.amazonaws.com/API/LikePlace/\(userId)/\(id)")
+            viewModel.isLikePlace.toggle()
         } label: {
             Image(systemName: "heart")
                 .foregroundColor(.black)
-//            Label("", systemImage: isFavorite ? "heart.fill" : "heart")
-//                .labelStyle(.iconOnly)
-//                .foregroundColor(isFavorite ? .red : .black)
         }
     }
-    
-//    @ViewBuilder
-//    func btnFavorite() -> some View {
-//        Button {
-//            isFavorite.toggle()
-//        } label: {
-//            Label("", systemImage: isFavorite ? "heart.fill" : "heart")
-//                .labelStyle(.iconOnly)
-//                .foregroundColor(isFavorite ? .red : .black)
-//        }
-//    }
 }
    
 struct DetailView_Previews: PreviewProvider {
@@ -218,50 +239,3 @@ struct DetailView_Previews: PreviewProvider {
         MainView()
     }
 }
-
-
-// temp
-func getMethod(urlString: String) {
-        guard let url = URL(string: urlString) else {
-            print("Error: cannot create URL")
-            return
-        }
-        // Create the url request
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            guard error == nil else {
-                print("Error: error calling GET")
-                print(error!)
-                return
-            }
-            guard let data = data else {
-                print("Error: Did not receive data")
-                return
-            }
-            guard let response = response as? HTTPURLResponse, (200 ..< 299) ~= response.statusCode else {
-                print("Error: HTTP request failed")
-                return
-            }
-            do {
-                guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                    print("Error: Cannot convert data to JSON object")
-                    return
-                }
-                guard let prettyJsonData = try? JSONSerialization.data(withJSONObject: jsonObject, options: .prettyPrinted) else {
-                    print("Error: Cannot convert JSON object to Pretty JSON data")
-                    return
-                }
-                guard let prettyPrintedJson = String(data: prettyJsonData, encoding: .utf8) else {
-                    print("Error: Could print JSON in String")
-                    return
-                }
-                
-                print("메롱")
-                print(prettyPrintedJson)
-            } catch {
-                print("Error: Trying to convert JSON data to string")
-                return
-            }
-        }.resume()
-    }

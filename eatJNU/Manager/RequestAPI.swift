@@ -28,13 +28,13 @@ struct PostItem: Identifiable, Codable {
 struct DetailItem: Codable {
     let id: Int
     let name: String
-    let likeCount, reviewCount: Int
+    var likeCount, reviewCount: Int
     let filter, tags: String
     let image: String
     let location, number, openingInfo: String
     let images: [placeImage]
     let lat, lon: Double 
-    let reviews: [reviewInfo]
+    var reviews: [reviewInfo] = []
     
     static let sample = DetailItem(id: 0, name: "", likeCount: 0, reviewCount: 0, filter: "", tags: "", image: "", location: "", number: "", openingInfo: "", images: [ImageSample], lat: 0, lon: 0, reviews: [reviewSample])
     
@@ -46,7 +46,10 @@ struct placeImage: Codable {
     let url: String
 }
 
-struct reviewInfo: Codable, Hashable {
+struct reviewInfo: Codable, Hashable, Identifiable {
+    var id: String? {
+        self.userId
+    }
     let comment: String
     let writingTime: String
     var userId: String?
@@ -66,4 +69,8 @@ struct FavoriteInfo: Hashable, Codable, Identifiable {
     }
     
     let placeId: Int
+}
+
+struct basicResponse: Codable {
+    var isSuccess: Bool
 }
