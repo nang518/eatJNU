@@ -169,7 +169,7 @@ import SwiftUI
                 .background(Color("addReviewBackground"))
                 
                 
-                let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale", "chicken", "pig", "squid", "walrus"]
+                let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale", "squid", "walrus", "chicken", "pig",]
                 ForEach(viewModel.details.reviews, id: \.self) { review in
                     HStack {
                         Image(randomImage[review.comment.count % randomImage.count])

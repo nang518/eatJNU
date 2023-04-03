@@ -39,7 +39,7 @@ struct DetailItem: Codable {
     static let sample = DetailItem(id: 0, name: "", likeCount: 0, reviewCount: 0, filter: "", tags: "", image: "", location: "", number: "", openingInfo: "", images: [ImageSample], lat: 0, lon: 0, reviews: [reviewSample])
     
     static let ImageSample = placeImage(url: "")
-    static let reviewSample = reviewInfo(comment: "", writingTime: "", userId: "", likeCount: 0)
+    static let reviewSample = reviewInfo(comment: "", writingTime: "", userId: "", likeCount: 0, placeId: 0)
 }
 
 struct placeImage: Codable {
@@ -54,6 +54,7 @@ struct reviewInfo: Codable, Hashable, Identifiable {
     let writingTime: String
     var userId: String?
     let likeCount: Int
+    let placeId: Int
 }
 
 struct LikePlace: Codable {
