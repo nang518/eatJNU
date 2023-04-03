@@ -25,21 +25,23 @@ import SwiftUI
             //사진, 가게이름, 좋아요, 댓글 주소
             VStack {
                 //URLImage
-                let urlStr = viewModel.details.image
-                if let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let myURL = URL(string: encodedStr) {
-                    AsyncImage(url: myURL) { phase in
-                        if let image = phase.image {
-                            image
-                                .resizable()
-                                .frame(height: 450)
-                            
-                        }
-                        else if phase.error != nil {
-                            Text(phase.error?.localizedDescription ?? "error")
-                                .foregroundColor(.pink)
-                        }
-                    }
-                }
+//                let urlStr = viewModel.details.image
+//                if let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let myURL = URL(string: encodedStr) {
+//                    AsyncImage(url: myURL) { phase in
+//                        if let image = phase.image {
+//                            image
+//                                .resizable()
+//                                .frame(height: 450)
+//
+//                        }
+//                        else if phase.error != nil {
+//                            Text(phase.error?.localizedDescription ?? "error")
+//                                .foregroundColor(.pink)
+//                        }
+//                    }
+//                }
+                
+                //image slider
                 
                 HStack {
                     Text(viewModel.details.name)
@@ -167,7 +169,7 @@ import SwiftUI
                 .background(Color("addReviewBackground"))
                 
                 
-                let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale"]
+                let randomImage = ["fox", "lion", "owl", "panda", "penguin", "rabbit2", "whale", "chicken", "pig", "squid", "walrus"]
                 ForEach(viewModel.details.reviews, id: \.self) { review in
                     HStack {
                         Image(randomImage[review.comment.count % randomImage.count])
@@ -233,6 +235,7 @@ import SwiftUI
         }
     }
 }
+
    
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
