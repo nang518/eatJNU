@@ -146,7 +146,7 @@ class DetailNetwork: ObservableObject {
                         DispatchQueue.main.async { [weak self] in
 
                             if (newReview.isSuccess) {
-                                self?.details.reviews.insert(reviewInfo(comment: comment, writingTime: "지금", likeCount: 0), at:0)
+                                self?.details.reviews.insert(reviewInfo(comment: comment, writingTime: "지금", likeCount: 0, placeId: self?.details.id), at:0)
                                 self?.details.reviewCount += 1
                                 self?.alreadyWrittenReview = true
                             } else {

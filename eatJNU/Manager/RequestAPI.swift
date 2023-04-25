@@ -54,7 +54,7 @@ struct reviewInfo: Codable, Hashable, Identifiable {
     let writingTime: String
     var userId: String?
     let likeCount: Int
-    let placeId: Int
+    var placeId: Int?
 }
 
 struct LikePlace: Codable {

@@ -25,21 +25,21 @@ import SwiftUI
             //사진, 가게이름, 좋아요, 댓글 주소
             VStack {
                 //URLImage
-//                let urlStr = viewModel.details.image
-//                if let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let myURL = URL(string: encodedStr) {
-//                    AsyncImage(url: myURL) { phase in
-//                        if let image = phase.image {
-//                            image
-//                                .resizable()
-//                                .frame(height: 450)
-//
-//                        }
-//                        else if phase.error != nil {
-//                            Text(phase.error?.localizedDescription ?? "error")
-//                                .foregroundColor(.pink)
-//                        }
-//                    }
-//                }
+                let urlStr = viewModel.details.image
+                if let encodedStr = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let myURL = URL(string: encodedStr) {
+                    AsyncImage(url: myURL) { phase in
+                        if let image = phase.image {
+                            image
+                                .resizable()
+                                .frame(height: 450)
+
+                        }
+                        else if phase.error != nil {
+                            Text(phase.error?.localizedDescription ?? "error")
+                                .foregroundColor(.pink)
+                        }
+                    }
+                }
                 
                 //image slider
                 
